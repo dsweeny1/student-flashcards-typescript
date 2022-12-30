@@ -1,0 +1,7 @@
+body {
+  background-image: url(../../assets/katie_torn.png);
+    height: 100vh;
+    width: 100vw;
+    background-size: cover;
+    cursor: url('../../assets/katie_torn_cursor.jpeg'), auto;
+}

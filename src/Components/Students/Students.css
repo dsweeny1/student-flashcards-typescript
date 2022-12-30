@@ -1,0 +1,6 @@
+.card-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-right: 140px;
+  }
