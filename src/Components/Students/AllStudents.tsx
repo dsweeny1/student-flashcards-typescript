@@ -1,6 +1,6 @@
 import React from 'react'
 import StudentCard from '../StudentCard/StudentCard'
-import './Students.css'
+import './AllStudents.css'
 import { StudentsProps } from '../App/App'
 // import PropTypes from 'prop-types';
 
@@ -9,7 +9,7 @@ type StudentsType = {
     deleteStudent: any
 }
 
-const Students: React.FC <StudentsType> = ({ students, deleteStudent }) => {
+const AllStudents: React.FC <StudentsType> = ({ students, deleteStudent }) => {
     const studentCards = students.map(student => {
         return (
             <section>
@@ -34,7 +34,7 @@ const Students: React.FC <StudentsType> = ({ students, deleteStudent }) => {
     )
 }
 
-export default Students
+export default AllStudents
 
 // Students.propTypes = {
 //     students: PropTypes.arrayOf(PropTypes.object),

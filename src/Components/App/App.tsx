@@ -1,7 +1,7 @@
 import './App.css';
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, Fragment} from 'react'
 import { Route, Routes } from 'react-router-dom'
-import Students from '../Students/Students';
+import AllStudents from '../Students/AllStudents';
 import Form from '../Form/Form'
 import Header from '../Header/Header';
 import Error from '../Error/Error'
@@ -112,8 +112,8 @@ const App = () => {
         <Route 
         path='/'>
             <>
-            {error && <Error />}
-            {!error && <Students 
+            {/* {error && <Error />} */}
+            element={<AllStudents 
             students={students}
             deleteStudent={deleteStudent}
             />}
