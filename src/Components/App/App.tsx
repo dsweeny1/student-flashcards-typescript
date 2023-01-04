@@ -1,7 +1,7 @@
 import './App.css';
 import React, {useState, useEffect, Fragment} from 'react'
 import { Route, Routes } from 'react-router-dom'
-import AllStudents from '../Students/AllStudents';
+import AllStudents from '../AllStudents/AllStudents';
 import Form from '../Form/Form'
 import Header from '../Header/Header';
 import Error from '../Error/Error'
@@ -18,17 +18,12 @@ export type StudentsProps = {
 }
 
 const App = () => {
-  const [students, setStudents] = useState<{id: string
-    name: string
-    favoriteBands: string
-    favoriteFoods: string
-    location: string
-    pets: string
-    image: string}[]>([])
+  const [students, setStudents] = useState<StudentsProps[]>([])
   console.log(students)
   const [error, setError] = useState<boolean>(false)
-
-  const getStudents = async (students: []): Promise<typeof students[]> => {
+  
+  const getStudents = async () => {
+    console.log('here')
     const url =(`https://final-project-api-aa6j.vercel.app/api/v1/students`)
     const options: RequestInit = {
       method: 'GET',
@@ -36,24 +31,27 @@ const App = () => {
         'Content-Type': 'application/json'
       }
     }
+    let data;
+    let response;
     try {
-      const response = await fetch(url,
-      options
-      )
-      const data = await response.json()
-  
-      console.log('students', data)
+      response = await fetch(url,
+        options
+        )
+        data = await response.json()
+        
+      } catch (error: any) {
+        console.log('error', error.message)
+        setError(true)
+      }
       setStudents(data.students)
-    } catch (error: any) {
-      console.log('error', error.message)
-      setError(true)
+      console.log('students', students)
+      // return students
     }
-    return students
-  }
+    useEffect(() => {
+      console.log('hi')
+      getStudents()
+    }, [])
 
-  useEffect(() => {
-    getStudents([])
-  }, [])
 
   const deleteStudent = async(id: string) => {
     console.log(id)
@@ -108,30 +106,26 @@ const App = () => {
   return (
     <div className="App">
       <Header />
-      <Routes>
-        <Route 
-        path='/'>
-            <>
-            {/* {error && <Error />} */}
-            element={<AllStudents 
-            students={students}
-            deleteStudent={deleteStudent}
-            />}
-            </>
-        </Route>
-        <Route 
-        path='/students/form'>
-            <>
-              {error && <Error />}
-             {!error && <Form 
-              addStudent={addStudent}
-              />}
-            </>
-        </Route>
-        <Route 
-        path='*' element={<Error />}
-        />
-      </Routes>
+      <Fragment>
+        <Routes>
+          <Route 
+          path='/'
+              element={!error ? <AllStudents 
+              students={students}
+              deleteStudent={deleteStudent}
+              /> : <Error />}
+          />
+          <Route 
+          path='students/form'
+              element={!error ? <Form 
+                addStudent={addStudent}
+                /> : <Error />}
+          />
+          <Route 
+          path='*' element={<Error />}
+          />
+        </Routes>
+      </Fragment>
    </div>
   );
 }
