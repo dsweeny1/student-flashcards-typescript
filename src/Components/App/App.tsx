@@ -93,7 +93,7 @@ const App = () => {
       if (!response.ok) {
         throw new (Error as any)(response.status)
       }
-      const data = response.json();
+      const data = await response.json();
       return data;
     }
     catch (error: any) {
