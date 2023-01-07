@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { resolveProjectReferencePath } from 'typescript'
 import './StudentCard.css'
 // import PropTypes from 'prop-types';
 
@@ -15,6 +16,7 @@ type StudentProps = {
 
 const StudentCard: React.FC<StudentProps> = ({ id, name, favoriteBands, favoriteFoods, location, pets, image, deleteStudent }) => {
     const [flip, setFlip] = useState(false)
+
         return (
             <div>
             <div className={`card ${flip ? 'flip' : ''}`} id={id} key={id}>

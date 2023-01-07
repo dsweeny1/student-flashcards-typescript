@@ -5,7 +5,6 @@ import AllStudents from '../AllStudents/AllStudents';
 import Form from '../Form/Form'
 import Header from '../Header/Header';
 import Error from '../Error/Error'
-// import { newStudent } from '../Form/Form'
 
 export type StudentsProps = {
   id: string
@@ -19,7 +18,6 @@ export type StudentsProps = {
 
 const App = () => {
   const [students, setStudents] = useState<StudentsProps[]>([])
-  console.log(students)
   const [error, setError] = useState<boolean>(false)
   
   const getStudents = async () => {
@@ -44,13 +42,11 @@ const App = () => {
         setError(true)
       }
       setStudents(data.students)
-      console.log('students', students)
-      // return students
     }
+
     useEffect(() => {
-      console.log('hi')
       getStudents()
-    }, [])
+    }, [students])
 
 
   const deleteStudent = async(id: string) => {
@@ -112,7 +108,7 @@ const App = () => {
           path='/'
               element={!error ? <AllStudents 
               students={students}
-              deleteStudent={deleteStudent}
+              deleteStudent={deleteStudent} 
               /> : <Error />}
           />
           <Route 
